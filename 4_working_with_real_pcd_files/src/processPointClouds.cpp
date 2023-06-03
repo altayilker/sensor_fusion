@@ -31,14 +31,50 @@ typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(ty
     std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height << std::endl
     << " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
 
+    // Create the filtering object
+    pcl::VoxelGrid<PointT> vg;
+    vg.setInputCloud (cloud);
+    vg.setLeafSize (filterRes, filterRes, filterRes);
+    typename pcl::PointCloud<PointT>::Ptr cloudFiltered (new pcl::PointCloud<PointT> ());
 
+    vg.filter (*cloudFiltered); 
+
+
+    std::cerr << "PointCloud after filtering: " << cloudFiltered->width * cloudFiltered->height << std::endl
+    << " data points (" << pcl::getFieldsList (*cloudFiltered) << ")." << std::endl;
+
+    typename pcl::PointCloud<PointT>::Ptr cloudRegion (new pcl::PointCloud<PointT> );
+
+    pcl::CropBox<PointT> region(true);
+    region.setMin(minPoint);
+    region.setMax(maxPoint);
+    region.setInputCloud(cloudFiltered);
+    region.filter(*cloudRegion);
+
+    std::vector<int> indices;
+
+    pcl::CropBox<PointT> roof(true);
+    roof.setMin(Eigen::Vector4f(-1.5, -1.7, -1, 1));
+    roof.setMax(Eigen::Vector4f(2.6, 1.7, -.4, 1));
+    roof.setInputCloud(cloudRegion);
+    roof.filter(indices);
+
+    pcl::PointIndices::Ptr inliers{new pcl::PointIndices};
+    for(int point : indices)
+        inliers->indices.push_back(point);
+
+    pcl::ExtractIndices<PointT> extract;
+    extract.setInputCloud(cloudRegion);
+    extract.setIndices(inliers);
+    extract.setNegative(true);
+    extract.filter(*cloudRegion);
 
 
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     std::cout << "filtering took " << elapsedTime.count() << " milliseconds" << std::endl;
 
-    return cloud;
+    return cloudFiltered;
 
 }
 

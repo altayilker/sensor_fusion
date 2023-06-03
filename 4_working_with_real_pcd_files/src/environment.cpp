@@ -75,7 +75,6 @@ void initCamera(CameraAngle setAngle, pcl::visualization::PCLVisualizer::Ptr& vi
         viewer->addCoordinateSystem (1.0);
 }
 
-int global_param = 0;
 
 void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer)
 {
@@ -83,12 +82,10 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer)
     pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessor.loadPcd("../src/sensors/data/pcd/data_2/0000000001.pcd");
     pcl::PointCloud<pcl::PointXYZI>::Ptr filteredCloud = pointProcessor.FilterCloud(inputCloud, 0.5 , Eigen::Vector4f(0.1, 0.1, 0.1, 1), Eigen::Vector4f(0.1, 0.1, 0.1, 1));
     
-    if(global_param == 0){
-        renderPointCloud(viewer, inputCloud, "cloud");
-        global_param = 1;
-    }
-    else
-        renderPointCloud(viewer, filteredCloud, "filteredcloud");
+
+    // renderPointCloud(viewer, inputCloud, "cloud");
+
+    renderPointCloud(viewer, filteredCloud, "filteredcloud");
 
 }
 
