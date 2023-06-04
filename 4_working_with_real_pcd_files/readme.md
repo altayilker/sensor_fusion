@@ -23,3 +23,6 @@ Segmented PCD ( segment ground and objects, checkout Segmented PCD commit)
 
 ![Screenshot from 2023-06-04 16-06-33](https://github.com/altayilker/sensor_fusion/assets/31896212/0c39bf82-35fc-448d-8a72-e8d96bf899f8)
 
+Clustering PCD ( give different colors to different objects around, checkout Clustering PCD commit)
+
+![Screenshot from 2023-06-04 16-34-47](https://github.com/altayilker/sensor_fusion/assets/31896212/132084f5-66cf-4353-9087-14883cb0def7)
