@@ -19,3 +19,7 @@ Crop the data for region of interest and remove roof lidar points (checkout the 
 
 ![Screenshot from 2023-06-04 14-39-37](https://github.com/altayilker/sensor_fusion/assets/31896212/cc7e838f-b020-4c82-beab-dec413fe1962)
 
+Segmented PCD ( segment ground and objects, checkout Segmented PCD commit)
+
+![Screenshot from 2023-06-04 16-06-33](https://github.com/altayilker/sensor_fusion/assets/31896212/0c39bf82-35fc-448d-8a72-e8d96bf899f8)
+
