@@ -79,10 +79,9 @@ void initCamera(CameraAngle setAngle, pcl::visualization::PCLVisualizer::Ptr& vi
 void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer)
 {
     ProcessPointClouds<pcl::PointXYZI> pointProcessor;
-    pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessor.loadPcd("../src/sensors/data/pcd/data_2/0000000001.pcd");
-    pcl::PointCloud<pcl::PointXYZI>::Ptr filteredCloud = pointProcessor.FilterCloud(inputCloud, 0.5 , Eigen::Vector4f(0.1, 0.1, 0.1, 1), Eigen::Vector4f(0.1, 0.1, 0.1, 1));
+    pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessor.loadPcd("../src/sensors/data/pcd/data_2/0000000023.pcd");
+    pcl::PointCloud<pcl::PointXYZI>::Ptr filteredCloud = pointProcessor.FilterCloud(inputCloud, 0.5 , Eigen::Vector4f(-10, -6, -3, 1), Eigen::Vector4f(20, 6, 3, 1));
     
-
     // renderPointCloud(viewer, inputCloud, "cloud");
 
     renderPointCloud(viewer, filteredCloud, "filteredcloud");
