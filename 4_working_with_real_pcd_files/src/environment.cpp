@@ -76,7 +76,7 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
         renderPointCloud(viewer, cluster, "obstCloud"+std::to_string(clusterId), colors[clusterId%colors.size()]);
 
         Box box = pointProcessor.BoundingBox(cluster);
-        //renderBox(viewer, box, clusterId);
+        renderBox(viewer, box, clusterId);
 
         ++clusterId;
     }
